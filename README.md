@@ -73,7 +73,7 @@ void setup() {
 }
 
 void loop() {
-  soilMoistureValue = analogRead(A0);  // Insert the sensor into soil
+  soilMoistureValue = analogRead(A0);  // read the soil moisture sensor
   if (soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) {
     Serial.println("Very Wet");
   } else if (soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals)) {
@@ -85,3 +85,10 @@ void loop() {
 }
 
 ```
+
+## Frequently Asked Questions
+### Why is my sensor giving inconsistent readings?
+Due to the capacitive sensing principle, readings can vary based on soil moisture, tightness, and insertion depth. Repeated insertions might loosen the soil, affecting subsequent readings.
+
+### What if my recorded Air and Water values are different from the examples?
+Individual sensor variations and environmental factors (like air humidity) can cause differences. Adjust your recorded values accordingly in the test code.
