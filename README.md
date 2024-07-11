@@ -23,7 +23,7 @@ Connect the sensor to the main control board following the wiring instructions b
 |  A0    |   Analog Input  |
 
 > [!NOTE]
-> The VCC and output difference is 0.6V. Therefore, when powered with 3.3V, the output in air is 2.8V and in water is 1.30V.
+> When powered with 3.3V, the output in air is 2.8V and in water is 1.30V.
 
 ## Initial Test Code
 
