@@ -5,7 +5,12 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U2QLAF8)
 
-# Soil Moisture Sensor Connection and Calibration Guide
+# Wired "SOILSENS-V5" and Wireless "SOILSENS-V5W"
+
+The SOILSENS-V5 is a reliable wired capacitive soil moisture sensor. Unlike cheap sensors from AliExpress, it has a longer design, keeping electronics away from the soil. It has no 3.3V regulator and can be powered from 2-5V. It is based on the MLC555 timer, making it much more energy-efficient. 
+
+
+## 🛒 Can be purchased from http://www.PricelessToolkit.com
 
 ## Connection Diagram
 
@@ -17,11 +22,12 @@ Connect the sensor to the main control board following the wiring instructions b
 |  VCC   |   3.3-5V        |
 |  A0    |   Analog Input  |
 
-
+> [!NOTE]
+> The VCC and output difference is 0.6V. Therefore, when powered with 3.3V, the output in air is 2.8V and in water is 1.30V.
 
 ## Initial Test Code
 
-To begin, we need to calibrate the sensor to establish its measurement range.
+First, we need to calibrate the sensor to establish its measurement range.
 
 ```cpp
 void setup() {
