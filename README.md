@@ -55,7 +55,7 @@ void loop() {
   int soilRaw = adc1_get_raw(ADC1_CHANNEL_0); // Get the raw ADC value from channel 0
   
   // Map the reading to a percentage (0 to 100)
-  // The map() function scales the raw value from the range 2100-4100 to 0-100
+  // The map() function scales the raw value from the range 4050-1950 to 0-100
   int soilPercent = map(soilRaw, DrySoil, HumidSoil, 0, 100);
   
   // Constrain the value to ensure it doesn't exceed 100%
