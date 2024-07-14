@@ -54,7 +54,7 @@ void loop() {
   
   // Map the reading to a percentage (0 to 100)
   // The map() function scales the raw value from the range 2100-4100 to 0-100
-  int soilPercent = map(soilRaw, DrySoil, 2100, 0, 100);
+  int soilPercent = map(soilRaw, DrySoil, HumidSoil, 0, 100);
   
   // Constrain the value to ensure it doesn't exceed 100%
   // The constrain() function limits the value to be between 0 and 100
