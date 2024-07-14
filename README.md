@@ -52,7 +52,7 @@ void setup() {
 
 void loop() {
   // Read the raw value from the soil sensor
-  int soilRaw = adc1_get_raw(ADC1_CHANNEL_0); // Get the raw ADC value from channel 3
+  int soilRaw = adc1_get_raw(ADC1_CHANNEL_0); // Get the raw ADC value from channel 0
   
   // Map the reading to a percentage (0 to 100)
   // The map() function scales the raw value from the range 2100-4100 to 0-100
