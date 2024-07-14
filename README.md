@@ -80,5 +80,5 @@ void loop() {
 ### Why is my sensor giving inconsistent readings?
 Due to the capacitive sensing principle, readings can vary based on soil moisture, tightness, and insertion depth. Repeated insertions might loosen the soil, affecting subsequent readings.
 
-### What if my recorded DrySoil and HumidSoil values are different from the examples?
+### Why are my recorded DrySoil and HumidSoil values are different from the examples?
 Individual sensor variations and environmental factors (like air humidity) can cause differences. Adjust your recorded values accordingly in the test code.
