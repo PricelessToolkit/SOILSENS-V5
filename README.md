@@ -27,7 +27,7 @@ Connect the sensor to the ESP32 board following the wiring instructions below:
 
 
 ## Calibration Process
-### Calibration Range
+
 1. Open the serial monitor and set the baud rate to 9600.
 2. Record the sensor value when the probe is in the dry soil. This value, referred to as "DrySoil" represents 0% soil moisture and typically ranges between 3900-4100.
 3. Insert the probe into a maximum wet soil not exceeding the tree line on the board. This value, referred to as "HumidSoil", representing 100% soil moisture.
