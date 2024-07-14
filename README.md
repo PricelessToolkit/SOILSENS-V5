@@ -65,7 +65,7 @@ void loop() {
   // Print the raw value and the mapped percentage
   Serial.print("Soil Sensor Raw Value: ");
   Serial.print(soilRaw);
-  Serial.print(" -> Soil Moisture: ");
+  Serial.print("Soil Moisture: ");
   Serial.print(soilPercent);
   Serial.println("%");
 
