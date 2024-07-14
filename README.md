@@ -40,6 +40,7 @@ Connect the sensor to the main control board following the wiring instructions b
 
 int DrySoil = 4100;
 int HumidSoil = 2100;
+
 void setup() {
   Serial.begin(9600); // Initialize serial communication at 9600 baud
 
