@@ -14,16 +14,16 @@ The SOILSENS-V5 is a reliable wired capacitive soil moisture sensor. Unlike chea
 
 ## Connection Diagram
 
-Connect the sensor to the main control board following the wiring instructions below:
+Connect the sensor to the ESP32 board following the wiring instructions below:
 
 | Sensor | Microcontreller |
 |--------|-----------------|
 |  GND   |   GND           |
 |  VCC   |   3.3-5V        |
-|  A0    |   Analog Input  |
+|  A0    |   GPIO0         |
 
 > [!NOTE]
-> When powered with 3.3V, the output in air is 2.8V and in water is 1.30V.
+> When powered with 3.3V, the output in air is ~2.8V "ADC 4050" and in water is ~1.4V "ADC 1950".
 
 
 ## Calibration Process
@@ -38,15 +38,16 @@ Connect the sensor to the main control board following the wiring instructions b
 ```cpp
 #include <driver/adc.h>
 
-int DrySoil = 4100;
-int HumidSoil = 2100;
+// Adjust your recorded values accordingly
+int DrySoil = 4050;
+int HumidSoil = 1950;
 
 void setup() {
   Serial.begin(9600); // Initialize serial communication at 9600 baud
 
   // Configure ADC1 channel 3
   adc1_config_width(ADC_WIDTH_BIT_12); // Set ADC width to 12 bits (0-4095)
-  adc1_config_channel_atten(ADC1_CHANNEL_3, ADC_ATTEN_DB_11); // Set attenuation to 11dB for higher input voltage range
+  adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11); // Set attenuation to 11dB for higher input voltage range
 }
 
 void loop() {
@@ -79,5 +80,5 @@ void loop() {
 ### Why is my sensor giving inconsistent readings?
 Due to the capacitive sensing principle, readings can vary based on soil moisture, tightness, and insertion depth. Repeated insertions might loosen the soil, affecting subsequent readings.
 
-### What if my recorded Air and Water values are different from the examples?
+### What if my recorded DrySoil and HumidSoil values are different from the examples?
 Individual sensor variations and environmental factors (like air humidity) can cause differences. Adjust your recorded values accordingly in the test code.
