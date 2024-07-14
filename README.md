@@ -38,7 +38,7 @@ Connect the sensor to the ESP32 board following the wiring instructions below:
 ```cpp
 #include <driver/adc.h>
 
-// Adjust your recorded values accordingly
+// Adjust the values.
 int DrySoil = 4050;
 int HumidSoil = 1950;
 
@@ -81,4 +81,4 @@ void loop() {
 Due to the capacitive sensing principle, readings can vary based on soil moisture, tightness, and insertion depth. Repeated insertions might loosen the soil, affecting subsequent readings.
 
 ### Why are my recorded DrySoil and HumidSoil values are different from the examples?
-Individual sensor variations and environmental factors (like air humidity) can cause differences. Adjust your recorded values accordingly in the test code.
+Individual sensor variations and environmental factors (like air humidity) can cause differences. Adjust the test code accordingly to the recorded values.
