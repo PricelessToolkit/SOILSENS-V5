@@ -25,70 +25,52 @@ Connect the sensor to the main control board following the wiring instructions b
 > [!NOTE]
 > When powered with 3.3V, the output in air is 2.8V and in water is 1.30V.
 
-## Initial Test Code
-
-First, we need to calibrate the sensor to establish its measurement range.
-
-```cpp
-void setup() {
-  Serial.begin(9600); // Initialize serial communication at 9600 bps
-}
-
-void loop() {
-  Serial.println(analogRead(A0)); // Read and print the sensor value
-  delay(100);
-}
-```
 
 ## Calibration Process
 ### Calibration Range
 1. Open the serial monitor and set the baud rate to 9600.
-2. Record the sensor value when the probe is exposed to air. This value, referred to as "Air Value," represents 0% soil moisture and typically ranges between 520-640.
-3. Insert the probe into a cup of water to the recommended depth (not exceeding the tree line on the board). The value recorded here, when it reads xx, is the "Water Value," representing 100% soil moisture.
-
-### Section Settings
-The sensor's humidity range is divided into three sections based on the recorded values:
-
-- Dry: (Air Value, Air Value - intervals]
-- Wet: (Air Value - intervals, Water Value + intervals]
-- Very Wet: (Water Value, Water Value + intervals]
-Note: The actual values may vary due to soil tightness, insertion depth, and other environmental factors. Humidity is inversely proportional to the sensor reading.
+2. Record the sensor value when the probe is in the dry soil. This value, referred to as "DrySoil" represents 0% soil moisture and typically ranges between 3900-4100.
+3. Insert the probe into a maximum wet soil not exceeding the tree line on the board. This value, referred to as "HumidSoil", representing 100% soil moisture.
+4. Insert the recorded "DrySoil" and "HumidSoil" values into the code.
 
 ### Final Test Code
-Insert the recorded Air and Water values into the following code:
-
 
 ```cpp
-/***************************************************
+#include <driver/adc.h>
 
- Created 2024-07-11
- By PricelessToolkit
-
- This example reads Analog Capacitive Soil Moisture Sensor "SOILSENS-V5".
-
- ****************************************************/
-
-const int AirValue = 600;   // Replace with the value recorded in the air
-const int WaterValue = 0;   // Replace with the value recorded in the water
-
-int intervals = (AirValue - WaterValue) / 3;
-int soilMoistureValue = 0;
-
+int DrySoil = 4100;
+int HumidSoil = 2100;
 void setup() {
-  Serial.begin(9600); // Initialize serial communication at 9600 bps
+  Serial.begin(9600); // Initialize serial communication at 9600 baud
+
+  // Configure ADC1 channel 3
+  adc1_config_width(ADC_WIDTH_BIT_12); // Set ADC width to 12 bits (0-4095)
+  adc1_config_channel_atten(ADC1_CHANNEL_3, ADC_ATTEN_DB_11); // Set attenuation to 11dB for higher input voltage range
 }
 
 void loop() {
-  soilMoistureValue = analogRead(A0);  // read the soil moisture sensor
-  if (soilMoistureValue > WaterValue && soilMoistureValue < (WaterValue + intervals)) {
-    Serial.println("Very Wet");
-  } else if (soilMoistureValue > (WaterValue + intervals) && soilMoistureValue < (AirValue - intervals)) {
-    Serial.println("Wet");
-  } else if (soilMoistureValue < AirValue && soilMoistureValue > (AirValue - intervals)) {
-    Serial.println("Dry");
-  }
-  delay(100);
+  // Read the raw value from the soil sensor
+  int soilRaw = adc1_get_raw(ADC1_CHANNEL_3); // Get the raw ADC value from channel 3
+  
+  // Map the reading to a percentage (0 to 100)
+  // The map() function scales the raw value from the range 2100-4100 to 0-100
+  int soilPercent = map(soilRaw, DrySoil, 2100, 0, 100);
+  
+  // Constrain the value to ensure it doesn't exceed 100%
+  // The constrain() function limits the value to be between 0 and 100
+  soilPercent = constrain(soilPercent, 0, 100);
+  
+  // Print the raw value and the mapped percentage
+  Serial.print("Soil Sensor Raw Value: ");
+  Serial.print(soilRaw);
+  Serial.print(" -> Soil Moisture: ");
+  Serial.print(soilPercent);
+  Serial.println("%");
+
+  // Wait for a short period before taking another reading
+  delay(1000); // Delay for 1 second (1000 milliseconds)
 }
+
 
 ```
 
