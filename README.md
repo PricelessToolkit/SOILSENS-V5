@@ -33,7 +33,7 @@ Connect the sensor to the ESP32 board following the wiring instructions below:
 3. Insert the probe into a maximum wet soil not exceeding the tree line on the board. This value, referred to as "HumidSoil", representing 100% soil moisture.
 4. Insert the recorded "DrySoil" and "HumidSoil" values into the code.
 
-### Final Test Code
+### Test Code
 
 ```cpp
 #include <driver/adc.h>
