@@ -25,15 +25,36 @@ Connect the sensor to the ESP32 board following the wiring instructions below:
 > [!NOTE]
 > When powered with 3.3V, the output in air is ~2.8V "ADC 4050" and in water is ~1.4V "ADC 1950".
 
+## ESPhome YAML
 
-## Calibration Process for Arduino Code
+```yaml
 
-1. Open the serial monitor and set the baud rate to 9600.
-2. Record the sensor value when the probe is in the dry soil. This value, referred to as "DrySoil" represents 0% soil moisture and typically ranges between 3900-4100.
-3. Insert the probe into a maximum wet soil not exceeding the tree line on the board. This value, referred to as "HumidSoil", representing 100% soil moisture.
-4. Insert the recorded "DrySoil" and "HumidSoil" values into the code.
 
-### ESP32 Arduino Code
+sensor:
+  - platform: adc
+    pin: A0
+    name: "Soil Moisture"
+    update_interval: 600s
+    unit_of_measurement: "%"
+    filters:
+    - median:
+        send_every: 4
+    - calibrate_linear:
+        - 2.8 -> 0.00    # CALIBRATE THIS
+        - 1.4 -> 100.00  # CALIBRATE THIS
+    - lambda: if (x < 1) return 0; else return (x);
+    accuracy_decimals: 0
+
+
+```
+
+### Calibration Process for ESPhome
+1. Upload the YAML example
+2. Check the wireless Logs for the minimum and maximum values
+3. Change the `- calibrate_linear:` "2.8 and 1.4" values.
+
+
+## ESP32 Arduino Code
 
 ```cpp
 #include <driver/adc.h>
@@ -75,6 +96,13 @@ void loop() {
 
 
 ```
+
+### Calibration Process for Arduino Code
+
+1. Open the serial monitor and set the baud rate to 9600.
+2. Record the sensor value when the probe is in the dry soil. This value, referred to as "DrySoil" represents 0% soil moisture and typically ranges between 3900-4100.
+3. Insert the probe into a maximum wet soil not exceeding the tree line on the board. This value, referred to as "HumidSoil", representing 100% soil moisture.
+4. Insert the recorded "DrySoil" and "HumidSoil" values into the code.
 
 ## Frequently Asked Questions
 ### Why is my sensor giving inconsistent readings?
