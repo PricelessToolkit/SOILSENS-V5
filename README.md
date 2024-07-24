@@ -7,7 +7,7 @@
 
 # Wired "SOILSENS-V5" and Wireless ["SOILSENS-V5W"](https://github.com/PricelessToolkit/SOILSENS-V5W)
 
-The SOILSENS-V5 is a reliable wired capacitive soil moisture sensor. Unlike cheap sensors from AliExpress, it has a longer design, keeping electronics away from the soil. It has no 3.3V regulator and can be powered from 2-5V. It is based on the MLC555 timer, making it much more energy-efficient. 
+The SOILSENS-V5 is a reliable wired capacitive soil moisture sensor. Unlike cheap sensors from AliExpress, it has a longer design, keeping electronics away from the soil. It has no 3.3V regulator and can be powered from 3-5V. It is based on the MLC555 timer, making it much more energy-efficient. 
 
 
 ## 🛒 Can be purchased from http://www.PricelessToolkit.com
