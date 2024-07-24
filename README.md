@@ -36,11 +36,10 @@ sensor:
   - platform: adc  # ADC documentation https://esphome.io/components/sensor/adc.html
     pin: A0
     name: "Soil Moisture"
-    update_interval: 600s
+    update_interval: 1s
     unit_of_measurement: "%"
+    attenuation: 11dB
     filters:
-    - median:
-        send_every: 4
     - calibrate_linear:
         - 2.8 -> 0.00    # CALIBRATE THIS
         - 1.4 -> 100.00  # CALIBRATE THIS
