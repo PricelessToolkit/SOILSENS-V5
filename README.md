@@ -20,7 +20,7 @@ Connect the sensor to the ESP32 board following the wiring instructions below:
 |--------|-----------------|
 |  GND   |   GND           |
 |  VCC   |   3.3-5V        |
-|  A0    |   GPIO0         |
+|  A0    |   GPIO0 "A0"    |
 
 > [!NOTE]
 > When powered with 3.3V, the output in air is ~2.8V "ADC 4050" and in water is ~1.4V "ADC 1950".
