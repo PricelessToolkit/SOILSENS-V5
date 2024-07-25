@@ -40,13 +40,16 @@ sensor:
     name: "Soil Moisture"
     update_interval: 1s
     unit_of_measurement: "%"
+    icon: "mdi:water-percent"
     attenuation: 11dB
     filters:
     - calibrate_linear:
-        - 2.8 -> 0.00    # CALIBRATE THIS
-        - 1.4 -> 100.00  # CALIBRATE THIS
-    - lambda: if (x < 1) return 0; else return (x);
-    accuracy_decimals: 0
+        - 2.8 -> 0.00    # # Calibrate Min in dry soil
+        - 1.4 -> 100.00  # Calibrate MAX in 100% wet soil 
+    - lambda: |
+        if (x < 0) return 0; 
+        else if (x > 100) return 100;
+        else return (x);
 
 
 ```
