@@ -17,11 +17,13 @@ The SOILSENS-V5 is a reliable wired capacitive soil moisture sensor. Unlike chea
 
 Connect the sensor to the ESP32 board following the wiring instructions below:
 
-| Sensor | Microcontreller |
-|--------|-----------------|
-|  GND   |   GND           |
-|  VCC   |   3.3-5V        |
-|  A0    |   GPIO0 "A0"    |
+| Sensor | Sensor Wire | Microcontroller |
+|--------|-------------|-----------------|
+| GND    | Black       | GND            |
+| VCC    | Red         | 3.3-5V         |
+| A0     | White       | GPIO0 "A0"     |
+
+
 
 > [!NOTE]
 > When powered with 3.3V, the output in air is ~2.8V "ADC 4050" and in water is ~1.4V "ADC 1950".
