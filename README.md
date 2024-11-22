@@ -42,7 +42,7 @@ sensor:
     update_interval: 1s
     unit_of_measurement: "%"
     icon: "mdi:water-percent"
-    attenuation: 11dB
+    attenuation: 12dB
     filters:
     - calibrate_linear:
         - 2.8 -> 0.00    # # Calibrate Min in dry soil
